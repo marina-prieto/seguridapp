@@ -12,13 +12,13 @@ function Validation(values) {
         error.email = ""
     }
 
-    if(values.password === "") {
-        error.password = "Password should not be empty"
+    if(values.pass === "") {
+        error.pass = "Password should not be empty"
     }
-    else if (!password_pattern.test(values.password)) {
-        error.password = "Password didn't match"
+    else if (!password_pattern.test(values.pass)) {
+        error.pass = "Password didn't match"
     } else {
-        error.password = ""
+        error.pass = ""
     }
     return error;
 }

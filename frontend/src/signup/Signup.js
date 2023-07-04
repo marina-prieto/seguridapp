@@ -6,9 +6,11 @@ import axios from 'axios'
 function Signup() {
 
     const [values, setValues] = useState({
-        name: '',
+        dni: '',
+        nombre: '',
         email: '',
-        password: ''
+        rol: '',
+        pass: ''
     })
 
     const navigate = useNavigate();
@@ -21,7 +23,7 @@ function Signup() {
     const handleSubmit = (event) => {
         event.preventDefault();
         setErrors(Validation(values));
-        if(errors.name === "" && errors.email === "" && errors.password === "") {
+        if(errors.dni === "" && errors.nombre === "" && errors.email === "" && errors.rol === "" && errors.pass === "") {
             axios.post('http://localhost:8081/signup', values)
             .then(res => {
                 navigate('/');
@@ -36,22 +38,34 @@ function Signup() {
                 <h2>Sign Up</h2>
                 <form action = "" onSubmit={handleSubmit}>
                     <div className='mb-3'>
-                        <label htmlFor="name"><strong>Name</strong></label>
-                        <input type="text" placeholder='Enter Name' name='name'
+                        <label htmlFor="dni"><strong>DNI</strong></label>
+                        <input type="text" placeholder='Ingrese DNI' name='dni'
                         onChange={handleInput} className='form-control rounded-0'/>
-                        {errors.name && <span className='text-danger'> {errors.name}</span>}
+                        {errors.dni && <span className='text-danger'> {errors.dni}</span>}
+                    </div>
+                    <div className='mb-3'>
+                        <label htmlFor="nombre"><strong>Nombre</strong></label>
+                        <input type="text" placeholder='Ingrese Nombre' name='nombre'
+                        onChange={handleInput} className='form-control rounded-0'/>
+                        {errors.nombre && <span className='text-danger'> {errors.nombre}</span>}
                     </div>
                     <div className='mb-3'>
                         <label htmlFor="email"><strong>Email</strong></label>
-                        <input type="email" placeholder='Enter Email' name='email'
+                        <input type="email" placeholder='Ingrese Email' name='email'
                         onChange={handleInput} className='form-control rounded-0'/>
                         {errors.email && <span className='text-danger'> {errors.email}</span>}
                     </div>
                     <div className='mb-3'>
-                        <label htmlFor="password"><strong>Password</strong></label>
-                        <input type="password" placeholder='Enter Password'  name='password'
+                        <label htmlFor="rol"><strong>Rol</strong></label>
+                        <input type="text" placeholder='Ingrese Rol' name='rol'
                         onChange={handleInput} className='form-control rounded-0'/>
-                        {errors.password && <span className='text-danger'> {errors.password}</span>}
+                        {errors.rol && <span className='text-danger'> {errors.rol}</span>}
+                    </div>
+                    <div className='mb-3'>
+                        <label htmlFor="pass"><strong>Password</strong></label>
+                        <input type="password" placeholder='Ingrese Contraseña'  name='pass'
+                        onChange={handleInput} className='form-control rounded-0'/>
+                        {errors.pass && <span className='text-danger'> {errors.pass}</span>}
                     </div>
                     <button type='submit' className='btn btn-success w-100 rounded-0'><strong>Sign up</strong></button>
                     <p> </p>

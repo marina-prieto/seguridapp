@@ -7,7 +7,7 @@ function Login() {
 
     const [values, setValues] = useState({
         email: '',
-        password: ''
+        pass: ''
     })
 
     const navigate = useNavigate();
@@ -20,7 +20,7 @@ function Login() {
     const handleSubmit =(event) => {
         event.preventDefault();
         setErrors(Validation(values));
-        if(errors.email === "" && errors.password === "") {
+        if(errors.email === "" && errors.pass === "") {
             axios.post('http://localhost:8081/login', values)
             .then(res => {
                 if(res.data === "Success") {
@@ -46,9 +46,9 @@ function Login() {
                     </div>
                     <div className='mb-3'>
                         <label htmlFor="password"><strong>Password</strong></label>
-                        <input type="password" placeholder='Enter Password' name='password'
+                        <input type="password" placeholder='Enter Password' name='pass'
                         onChange={handleInput} className='form-control rounded-0'/>
-                        {errors.password && <span className='text-danger'> {errors.password}</span>}
+                        {errors.pass && <span className='text-danger'> {errors.pass}</span>}
                     </div>
                     <button type='submit' className='btn btn-success w-100 rounded-0'><strong>Log in</strong></button>
                     <p></p>

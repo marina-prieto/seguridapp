@@ -3,10 +3,16 @@ function Validation(values) {
     const email_pattern = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/
     const password_pattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[a-zA-Z0-9]{8,}$/
 
-    if(values.name === "") {
-        error.name = "Name should not be empty"
+    if(values.dni === "") {
+        error.dni = "Name should not be empty"
     } else {
-        error.name = ""
+        error.dni = ""
+    }
+
+    if(values.nombre === "") {
+        error.nombre = "Name should not be empty"
+    } else {
+        error.nombre = ""
     }
 
     if(values.email === "") {
@@ -17,12 +23,18 @@ function Validation(values) {
         error.email = ""
     }
 
-    if(values.password === "") {
-        error.password = "Password should not be empty"
-    } else if (!password_pattern.test(values.password)) {
-        error.password = "Password didn't match"
+    if(values.rol === "") {
+        error.rol = "Role should not be empty"
     } else {
-        error.password = ""
+        error.rol = ""
+    }
+
+    if(values.pass === "") {
+        error.pass = "Password should not be empty"
+    } else if (!password_pattern.test(values.pass)) {
+        error.pass = "Password didn't match"
+    } else {
+        error.pass = ""
     }
     return error;
 }
