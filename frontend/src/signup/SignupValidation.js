@@ -32,7 +32,7 @@ function Validation(values) {
     if(values.pass === "") {
         error.pass = "Password should not be empty"
     } else if (!password_pattern.test(values.pass)) {
-        error.pass = "Password didn't match"
+        error.pass = "Password needs at least 1 uppercase, numbers and 8 digits"
     } else {
         error.pass = ""
     }

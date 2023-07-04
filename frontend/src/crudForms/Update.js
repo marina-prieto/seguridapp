@@ -16,7 +16,7 @@ function Update() {
         event.preventDefault();
         axios.put('http://localhost:8081/update/'+id, {nombre,municipio,direccion,telefono})
         .then(res => {
-            navigate('/home');
+            navigate('/');
         }).catch(err => console.log(err));
     }
 
@@ -37,7 +37,7 @@ function Update() {
                     </div>
                     <div className = 'mb-2'>
                         <label htmlFor="">Dirección</label>
-                        <input type="email" placeholder='Ingrese Dirección' className='form-control'
+                        <input type="text" placeholder='Ingrese Dirección' className='form-control'
                         onChange={e => setDireccion(e.target.value)}/>
                     </div>
                     <div className = 'mb-2'>

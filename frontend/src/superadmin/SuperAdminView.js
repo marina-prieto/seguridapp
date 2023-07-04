@@ -6,14 +6,14 @@ function Home() {
 
     const [data, setData] = useState([]);
     useEffect(() => {
-        axios.get('http://localhost:8081/')
+        axios.get('http://localhost:8081/superadmin/museum')
         .then(res => setData(res.data))
         .catch(err => console.log(err));
     })
 
     const handleDelete = (id) => {
         axios.delete('http://localhost:8081/delete/'+id)
-        .then(res => navigate('/home'))
+        .then(res => navigate('/superadmin/museum'))
         .catch(err => console.log(err));
     }
 
@@ -22,7 +22,6 @@ function Home() {
     return (
         <div className='justify-content-center align-items-center bg-dark vh-100'>
             <div className='bg-white rounded w-50'></div>
-                <Link to="/create" className="btn btn-success">Add +</Link>
                 <table className= 'table'>
                     <thead>
                         <tr>

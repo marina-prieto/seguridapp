@@ -44,14 +44,6 @@ app.post('/login', (req, res) => {
     })
 })
 
-app.get('/', (req, res) => {
-    const sql = "SELECT * FROM museos";
-    db.query(sql, (err, data) => {
-        if(err) return res.json(err);
-        return res.json(data);
-    })
-})
-
 app.post('/create', (req, res) => {
     const sql = "INSERT INTO museos (`nombre`,`municipio`,`direccion`,`telefono`) VALUES (?)";
     const values = [
@@ -94,6 +86,33 @@ app.delete('/delete/:id', (req, res) => {
             return res.json(err);
         }
         return res.json("DELETED");
+    })
+})
+
+
+app.get('/superadmin/museum', (req, res) => {
+    const sql = "SELECT * FROM museos";
+    db.query(sql, (err, data) => {
+        if(err) return res.json(err);
+        return res.json(data);
+    })
+})
+
+
+app.get('/admin/museum', (req, res) => {
+    const sql = "SELECT * FROM museos";
+    db.query(sql, (err, data) => {
+        if(err) return res.json(err);
+        return res.json(data);
+    })
+})
+
+
+app.get('/user/museum', (req, res) => {
+    const sql = "SELECT * FROM museos";
+    db.query(sql, (err, data) => {
+        if(err) return res.json(err);
+        return res.json(data);
     })
 })
 
