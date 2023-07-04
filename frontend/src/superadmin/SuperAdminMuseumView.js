@@ -6,10 +6,16 @@ function Home() {
 
     const [data, setData] = useState([]);
     useEffect(() => {
-        axios.get('http://localhost:8081/admin/museum')
+        axios.get('http://localhost:8081/superadmin/museum')
         .then(res => setData(res.data))
         .catch(err => console.log(err));
     })
+
+    const handleDelete = (id) => {
+        axios.delete('http://localhost:8081/deleteMuseum/'+id)
+        .then(res => navigate('/superadmin/museum'))
+        .catch(err => console.log(err));
+    }
 
     const navigate = useNavigate();
 
@@ -34,7 +40,8 @@ function Home() {
                                 <td> {d.direccion} </td>
                                 <td> {d.telefono} </td>
                                 <td>
-                                    <Link to={`/update/${d.id}`} className="btn btn-sm btn-primary">Update</Link>
+                                    <Link to={`/updateMuseum/${d.id}`} className="btn btn-sm btn-primary">Update</Link>
+                                    <button onClick={e => handleDelete(d.id)} className="btn btn-sm btn-danger">Delete</button>
                                 </td>
                             </tr>
                         ))}

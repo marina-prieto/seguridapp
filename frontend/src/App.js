@@ -4,9 +4,12 @@ import Signup from './signup/Signup';
 import Login from './login/Login';
 import Create from './crudForms/Create';
 import Update from './crudForms/Update';
-import SuperAdminView from './superadmin/SuperAdminView';
-import AdminView from './administrator/AdminView';
-import UserView from './user/UserView';
+import SuperAdminView from './superadmin/SuperAdminMuseumView';
+import AdminView from './administrator/AdminMuseumView';
+import UserView from './user/UserMuseumView';
+import SuperAdminUsers from './superadmin/SuperAdminUsers';
+import CreateUser from './crudForms/CreateUser';
+import UpdateUser from './crudForms/UpdateUser';
 
 function App() {
   return (
@@ -14,12 +17,17 @@ function App() {
     <Routes>
       <Route path='/' element={<Login />}></Route>
       <Route path='/signup' element={<Signup />}></Route>
-      <Route path='/create' element={<Create />}></Route>
-      <Route path='/update/:id' element={<Update />}></Route>
+      <Route path='/createMuseum' element={<Create />}></Route>
+      <Route path='/updateMuseum/:id' element={<Update />}></Route>
 
       <Route path='/superadmin/museum' element={<SuperAdminView />}></Route>
       <Route path='/admin/museum' element={<AdminView />}></Route>
       <Route path='/user/museum' element={<UserView />}></Route>
+
+      <Route path='/superadmin/users' element={<SuperAdminUsers />}></Route>
+      <Route path='/createUser' element={<CreateUser />}></Route>
+      <Route path='/updateUser/:id' element={<UpdateUser />}></Route>
+
     </Routes>
     </BrowserRouter>
   );

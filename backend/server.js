@@ -44,7 +44,56 @@ app.post('/login', (req, res) => {
     })
 })
 
-app.post('/create', (req, res) => {
+app.post('/createUser', (req, res) => {
+    const sql = "INSERT INTO users (`dni`,`nombre`,`email`,`rol`,`pass`) VALUES (?)";
+    const values = [
+        req.body.dni,
+        req.body.nombre,
+        req.body.email,
+        req.body.rol,
+        req.body.pass
+    ]
+    db.query(sql, [values], (err, data) => {
+        if(err) {
+            return res.json(err);
+        }
+        return res.json("CREATED");
+    })
+})
+
+app.put('/updateUser/:id', (req, res) => {
+    const sql = "UPDATE users set `dni` =?, `nombre` =?, `email` =?, `rol` =?, `pass` =? WHERE id = ?";
+    const id = req.params.id;
+    const values = [
+        req.body.dni,
+        req.body.nombre,
+        req.body.email,
+        req.body.rol,
+        req.body.pass
+    ]
+    db.query(sql, [...values, id], (err, data) => {
+        if(err) {
+            return res.json(err);
+        }
+        return res.json("UPDATED");
+    })
+})
+
+app.delete('/deleteUser/:id', (req, res) => {
+    const sql = "DELETE FROM users WHERE id = ?";
+    const id = req.params.id;
+    
+    db.query(sql, [id], (err, data) => {
+        if(err) {
+            return res.json(err);
+        }
+        return res.json("DELETED");
+    })
+})
+
+
+
+app.post('/createMuseum', (req, res) => {
     const sql = "INSERT INTO museos (`nombre`,`municipio`,`direccion`,`telefono`) VALUES (?)";
     const values = [
         req.body.nombre,
@@ -60,7 +109,7 @@ app.post('/create', (req, res) => {
     })
 })
 
-app.put('/update/:id', (req, res) => {
+app.put('/updateMuseum/:id', (req, res) => {
     const sql = "UPDATE museos set `nombre` =?, `municipio` =?, `direccion` =?, `telefono` =? WHERE id = ?";
     const id = req.params.id;
     const values = [
@@ -77,7 +126,7 @@ app.put('/update/:id', (req, res) => {
     })
 })
 
-app.delete('/delete/:id', (req, res) => {
+app.delete('/deleteMuseum/:id', (req, res) => {
     const sql = "DELETE FROM museos WHERE id = ?";
     const id = req.params.id;
     
@@ -110,6 +159,15 @@ app.get('/admin/museum', (req, res) => {
 
 app.get('/user/museum', (req, res) => {
     const sql = "SELECT * FROM museos";
+    db.query(sql, (err, data) => {
+        if(err) return res.json(err);
+        return res.json(data);
+    })
+})
+
+
+app.get('/superadmin/users', (req, res) => {
+    const sql = "SELECT * FROM users";
     db.query(sql, (err, data) => {
         if(err) return res.json(err);
         return res.json(data);

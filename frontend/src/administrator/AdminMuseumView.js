@@ -6,7 +6,7 @@ function Home() {
 
     const [data, setData] = useState([]);
     useEffect(() => {
-        axios.get('http://localhost:8081/user/museum')
+        axios.get('http://localhost:8081/admin/museum')
         .then(res => setData(res.data))
         .catch(err => console.log(err));
     })
@@ -16,7 +16,6 @@ function Home() {
     return (
         <div className='justify-content-center align-items-center bg-dark vh-100'>
             <div className='bg-white rounded w-50'></div>
-                <Link to="/create" className="btn btn-success">Add +</Link>
                 <table className= 'table'>
                     <thead>
                         <tr>
@@ -24,6 +23,7 @@ function Home() {
                             <th>Municipio</th>
                             <th>Dirección</th>
                             <th>Teléfono</th>
+                            <th>Acción</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -33,6 +33,9 @@ function Home() {
                                 <td> {d.municipio} </td>
                                 <td> {d.direccion} </td>
                                 <td> {d.telefono} </td>
+                                <td>
+                                    <Link to={`/updateMuseum/${d.id}`} className="btn btn-sm btn-primary">Update</Link>
+                                </td>
                             </tr>
                         ))}
                     </tbody>
