@@ -2,32 +2,31 @@ import React, { useEffect, useState } from "react";
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 
-function SuperAdminUsers() {
+function AdminUsers() {
 
     const [data, setData] = useState([]);
     useEffect(() => {
-        axios.get('http://localhost:8081/superadmin/users')
+        axios.get('http://localhost:8081/admin/users')
         .then(res => setData(res.data))
         .catch(err => console.log(err));
     })
 
-    const handleDelete = (id) => {
-        axios.delete('http://localhost:8081/deleteUser/'+id)
-        .then(res => navigate('/superadmin/users'))
-        .catch(err => console.log(err));
-    }
-
-    const CensoredText = ({ text }) => {
-        const censoredText = "*".repeat(text.length);
-        return <span>{censoredText}</span>;
-      };
+    const CensoredDNI = ({ dni }) => {
+        const censoredDNI = dni.replace(/[a-zA-Z0-9]/g, (match, index) => {
+          if (index === 0 || index === 2 || index === 4 || index === 5 || index === 8) {
+            return '*';
+          }
+          return match;
+        });
+      
+        return <span>{censoredDNI}</span>;
+    };
 
     const navigate = useNavigate();
 
     return (
         <div className='justify-content-center align-items-center bg-dark vh-100'>
             <div className='bg-white rounded w-50'></div>
-            <Link to="/createUser" className="btn btn-success">Add +</Link>
                 <table className= 'table'>
                     <thead>
                         <tr>
@@ -35,22 +34,15 @@ function SuperAdminUsers() {
                             <th>Nombre</th>
                             <th>Email</th>
                             <th>Rol</th>
-                            <th>Password</th>
-                            <th>Acción</th>
                         </tr>
                     </thead>
                     <tbody>
                         {data.map ((d, i) => (
                             <tr>
-                                <td> {d.dni} </td>
+                                <td> {<CensoredDNI dni={d.dni} />} </td>
                                 <td> {d.nombre} </td>
                                 <td> {d.email} </td>
                                 <td> {d.rol} </td>
-                                <td> {<CensoredText text={d.pass} />} </td>
-                                <td>
-                                    <Link to={`/updateUser/${d.id}`} className="btn btn-sm btn-primary">Update</Link>
-                                    <button onClick={e => handleDelete(d.id)} className="btn btn-sm btn-danger">Delete</button>
-                                </td>
                             </tr>
                         ))}
                     </tbody>
@@ -59,4 +51,4 @@ function SuperAdminUsers() {
     )
 }
 
-export default SuperAdminUsers
+export default AdminUsers

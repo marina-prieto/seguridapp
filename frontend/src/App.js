@@ -10,6 +10,7 @@ import UserView from './user/UserMuseumView';
 import SuperAdminUsers from './superadmin/SuperAdminUsers';
 import CreateUser from './crudForms/CreateUser';
 import UpdateUser from './crudForms/UpdateUser';
+import AdminUsers from './administrator/AdminUsers';
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
       <Route path='/superadmin/users' element={<SuperAdminUsers />}></Route>
       <Route path='/createUser' element={<CreateUser />}></Route>
       <Route path='/updateUser/:id' element={<UpdateUser />}></Route>
+      <Route path='/admin/users' element={<AdminUsers />}></Route>
 
     </Routes>
     </BrowserRouter>

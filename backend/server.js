@@ -174,6 +174,14 @@ app.get('/superadmin/users', (req, res) => {
     })
 })
 
+app.get('/admin/users', (req, res) => {
+    const sql = "SELECT * FROM users";
+    db.query(sql, (err, data) => {
+        if(err) return res.json(err);
+        return res.json(data);
+    })
+})
+
 app.listen(8081, ()=> {
     console.log("listening");
 })
